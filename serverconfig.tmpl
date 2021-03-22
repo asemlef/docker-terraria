@@ -1,0 +1,38 @@
+# See wiki for details
+# https://terraria.gamepedia.com/Guide:Setting_up_a_Terraria_server#Making_a_configuration_file
+
+# Server Settings
+port=7777
+world=/data/Worlds/${TERRARIA_WORLD_NAME// /_}.wld
+maxplayers=${TERRARIA_SERVER_MAXPLAYERS}
+password=${TERRARIA_SERVER_PASSWORD}
+motd=${TERRARIA_SERVER_MOTD}
+worldpath=/data/Worlds
+banlist=/data/banlist.txt
+secure=${TERRARIA_SERVER_SECURE}
+language=${TERRARIA_SERVER_LANGUAGE}
+
+# Journey Mode Settings
+journeypermission_time_setspeed=${TERRARIA_JOURNEY_TIME}
+journeypermission_time_setfrozen=${TERRARIA_JOURNEY_TIME}
+journeypermission_time_setdawn=${TERRARIA_JOURNEY_TIME}
+journeypermission_time_setnoon=${TERRARIA_JOURNEY_TIME}
+journeypermission_time_setdusk=${TERRARIA_JOURNEY_TIME}
+journeypermission_time_setmidnight=${TERRARIA_JOURNEY_TIME}
+journeypermission_wind_setstrength=${TERRARIA_JOURNEY_WEATHER}
+journeypermission_wind_setspeed=${TERRARIA_JOURNEY_WEATHER}
+journeypermission_wind_setfrozen=${TERRARIA_JOURNEY_WEATHER}
+journeypermission_rain_setstrength=${TERRARIA_JOURNEY_WEATHER}
+journeypermission_rain_setspeed=${TERRARIA_JOURNEY_WEATHER}
+journeypermission_rain_setfrozen=${TERRARIA_JOURNEY_WEATHER}
+journeypermission_godmode=${TERRARIA_JOURNEY_GODMODE}
+journeypermission_increaseplacementrange=${TERRARIA_JOURNEY_PLACEMENT}
+journeypermission_setdifficulty=${TERRARIA_JOURNEY_DIFFICULTY}
+journeypermission_biomespread_setfrozen=${TERRARIA_JOURNEY_BIOMESPREAD}
+journeypermission_setspawnrate=${TERRARIA_JOURNEY_SPAWNRATE}
+
+# World Creation
+autocreate=${TERRARIA_WORLD_SIZE}
+difficulty=${TERRARIA_WORLD_DIFFICULTY}
+worldname=${TERRARIA_WORLD_NAME}
+seed=${TERRARIA_WORLD_SEED}
