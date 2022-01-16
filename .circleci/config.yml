@@ -1,0 +1,21 @@
+version: 2.1
+
+orbs:
+  docker: circleci/docker@2.0.1
+
+jobs:
+  build:
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build docker image
+          command: |
+            echo "$GHCR_PAT" | docker login -u asemlef --password-stdin
+            docker build -t terraria .
+            docker push ghcr.io/asemlef/terraria:latest
+
+workflows:
+  build-workflow:
+    jobs:
+      - build
