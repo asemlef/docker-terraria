@@ -1,7 +1,6 @@
 FROM debian:10-slim
 
 # app versions to use
-ARG ARCHIVE_VERSION=044
 ARG TERRARIA_VERSION=1421
 ARG WRAPPER_VERSION=1.0.2
 
@@ -18,7 +17,7 @@ RUN wget -P /usr/local/bin "https://github.com/iagox86/game-docker-wrapper/relea
 WORKDIR /terraria-server
 
 # download and unpack the terraria server
-RUN wget "https://terraria.org/system/dedicated_servers/archives/000/000/${ARCHIVE_VERSION}/original/terraria-server-${TERRARIA_VERSION}.zip" \
+RUN wget "https://terraria.org/api/download/pc-dedicated-server/terraria-server-${TERRARIA_VERSION}.zip" \
     && unzip terraria-server-${TERRARIA_VERSION}.zip \
     && mv ${TERRARIA_VERSION}/Linux/* . \
     && chmod u+x TerrariaServer* \
