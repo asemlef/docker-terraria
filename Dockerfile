@@ -6,7 +6,7 @@ ARG WRAPPER_VERSION=1.0.2
 
 # run updates
 RUN apt-get -y update \
-    && apt-get -y install wget unzip jq file \
+    && apt-get -y install wget unzip jq file netcat-traditional \
     && apt-get -y clean
 
 # install game-docker-wrapper for graceful exiting

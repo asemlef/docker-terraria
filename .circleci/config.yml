@@ -12,9 +12,16 @@ jobs:
       - setup_remote_docker
       - run:
           name: Build docker image
+          command: docker build -t ghcr.io/asemlef/terraria .
+      - run:
+          name: Run tests
+          command: |
+           docker run -d --name terraria ghcr.io/asemlef/terraria
+           docker exec terraria nc -z localhost 7777
+      - run:
+          name: Upload docker image
           command: |
             echo "$GHCR_PAT" | docker login ghcr.io -u asemlef --password-stdin
-            docker build -t ghcr.io/asemlef/terraria .
             docker push ghcr.io/asemlef/terraria:latest
 
 workflows:
