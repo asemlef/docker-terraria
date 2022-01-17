@@ -40,7 +40,7 @@ The Terraria server is configured using environment variables, which are based o
 | `TERRARIA_JOURNEY_BIOMESPREAD` | Journey Mode: controls changing biome spread | 2 |
 | `TERRARIA_JOURNEY_SPAWNRATE` | Journey Mode: controls changing spawn rate | 2 |
 | `TERRARIA_WORLD_NAME` | The name of the world to create | "World" |
-| `TERRARIA_WORLD_SIZE` | The size of the world to create, from 1-3 | 3 |
+| `TERRARIA_WORLD_SIZE` | The size of the world to create, from 1-3 | 1 |
 | `TERRARIA_WORLD_DIFFICULTY` | The difficulty of the world to create, from 0-3 | 0 |
 | `TERRARIA_WORLD_SEED` | Seed to create the world from ([docs](https://terraria.gamepedia.com/World_Seed)) | None |
 
