@@ -18,13 +18,15 @@ jobs:
           name: Run tests
           command: |
            docker run -d --volume "$PWD/.circleci/World.wld:/data/Worlds/World.wld" --name terraria ghcr.io/asemlef/terraria
-           echo "$PWD/.circleci/World.wld:/data/Worlds/World.wld"
+           docker logs terraria > docker.log
            sleep 30; docker exec terraria nc -z localhost 7777
       - run:
           name: Upload docker image
           command: |
             echo "$GHCR_PAT" | docker login ghcr.io -u asemlef --password-stdin
             docker push ghcr.io/asemlef/terraria:latest
+      - store_artifacts:
+          path: ~/terraria/docker.log
 
 workflows:
   build-workflow:
