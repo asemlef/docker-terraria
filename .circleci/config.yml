@@ -18,8 +18,8 @@ jobs:
           name: Run tests
           command: |
             file "$PWD/.circleci/World.wld"
-            docker run -d --volume "$PWD/.circleci/World.wld:/data/Worlds/World.wld" --name terraria ghcr.io/asemlef/terraria
-            sleep 30; docker logs terraria > docker.log
+            docker run -id --volume "$PWD/.circleci/World.wld:/data/Worlds/World.wld" --name terraria ghcr.io/asemlef/terraria
+            sleep 120; docker logs terraria > docker.log
             sleep 30; docker exec terraria nc -z localhost 7777
             echo "Test!"
       - run:
