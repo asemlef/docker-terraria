@@ -1,4 +1,4 @@
-FROM debian:10-slim
+FROM debian:11-slim
 
 # app versions to use
 ARG TERRARIA_VERSION=1432

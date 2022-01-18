@@ -46,7 +46,7 @@ The Terraria server is configured using environment variables, which are based o
 
 ### Using an Existing World
 
-While the container is designed to use a fresh world that's auto-created on first start, it's possible to use an existing world file instead. To do so, place the file into `/terraria/Worlds` and set `TERRARIA_WORLD_NAME` to the name of that world.
+While the container is designed to use a fresh world that's auto-created on first start, it's possible to use an existing world file instead. To do so, place the file into `/data/Worlds` and set `TERRARIA_WORLD_NAME` to the name of that world.
 
 ## Notes
 
