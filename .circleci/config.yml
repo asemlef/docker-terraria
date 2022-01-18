@@ -19,7 +19,7 @@ jobs:
           command: |
             chmod 777 "$PWD/.circleci/World.wld"
             docker run -id --volume "$PWD/.circleci/World.wld:/data/Worlds/World.wld" --name terraria ghcr.io/asemlef/terraria
-            docker exec terraria ls -lA /data
+            docker exec terraria ls -lA /
             sleep 120; docker logs terraria > docker.log
             sleep 10; docker exec terraria nc -z localhost 7777
       - run:
