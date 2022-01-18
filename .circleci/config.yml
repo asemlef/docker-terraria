@@ -17,11 +17,10 @@ jobs:
       - run:
           name: Run tests
           command: |
-            file "$PWD/.circleci/World.wld"
+            echo "WHOAMI: $(whoami); PERMISSIONS: $(ls -lA $PWD/.circleci)"
             docker run -id --volume "$PWD/.circleci/World.wld:/data/Worlds/World.wld" --name terraria ghcr.io/asemlef/terraria
             sleep 120; docker logs terraria > docker.log
-            sleep 30; docker exec terraria nc -z localhost 7777
-            echo "Test!"
+            sleep 10; docker exec terraria nc -z localhost 7777
       - run:
           name: Upload docker image
           command: |
