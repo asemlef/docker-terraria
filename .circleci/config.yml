@@ -17,9 +17,11 @@ jobs:
       - run:
           name: Run tests
           command: |
-           docker run -d --volume "$PWD/.circleci/World.wld:/data/Worlds/World.wld" --name terraria ghcr.io/asemlef/terraria
-           sleep 30; docker logs terraria > docker.log
-           sleep 30; docker exec terraria nc -z localhost 7777
+            file "$PWD/.circleci/World.wld:/data/Worlds/World.wld"
+            docker run -d --volume "$PWD/.circleci/World.wld:/data/Worlds/World.wld" --name terraria ghcr.io/asemlef/terraria
+            sleep 30; docker logs terraria > docker.log
+            sleep 30; docker exec terraria nc -z localhost 7777
+            echo "Test!"
       - run:
           name: Upload docker image
           command: |
