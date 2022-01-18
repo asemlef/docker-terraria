@@ -17,7 +17,10 @@ jobs:
           name: Run tests
           command: |
            docker run -d --name terraria ghcr.io/asemlef/terraria
-           docker exec terraria nc -z localhost 7777
+           # terraria is VERY slow to come up on first run due to running world generation,
+           # so we use sleep to wait for that to finish
+           # TODO: figure out how to inject a pregenerated world file to speed this up
+           sleep 120; docker exec terraria nc -z localhost 7777
       - run:
           name: Upload docker image
           command: |
