@@ -24,11 +24,29 @@ jobs:
             echo "$GHCR_PAT" | docker login ghcr.io -u asemlef --password-stdin
             docker push ghcr.io/asemlef/terraria:latest
 
+  python-test:
+    docker:
+      - image: cimg/python:3.10.2
+    steps:
+      - checkout
+      - run: python --version
+
 workflows:
-  build-workflow:
+  build:
     jobs:
       - build:
         filters:
           branches:
             only:
               - main
+
+  cron-test:
+    jobs:
+      - python-test
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - main
