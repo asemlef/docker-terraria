@@ -37,8 +37,11 @@ jobs:
           name: Run tests
           command: |
             docker run -id --volume "$PWD/.circleci/World.wld:/data/Worlds/World.wld" --name terraria ghcr.io/asemlef/terraria
-            docker logs -f terraria > terraria.log &
             sleep 10; docker exec terraria nc -z localhost 7777
+      - run:
+          name: Capture logs on test fail
+          command: docker logs terraria > terraria.log
+          when: on_fail
       - store_artifacts:
           path: ~/terraria/terraria.log
 
