@@ -10,6 +10,7 @@ jobs:
       - image: cimg/base:2022.01
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: Build docker image
           command: docker build -t ghcr.io/asemlef/terraria .
