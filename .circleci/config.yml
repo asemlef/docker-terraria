@@ -6,23 +6,47 @@ orbs:
 jobs:
   build:
     working_directory: ~/terraria
-    machine:
-      image: ubuntu-2004:202010-01
+    docker:
+      - image: cimg/base:2022.01
     steps:
       - checkout
       - run:
           name: Build docker image
           command: docker build -t ghcr.io/asemlef/terraria .
       - run:
+          name: Save image to cache
+          command: docker save -o ~/terraria/app.tar terraria
+      - persist_to_workspace:
+          root: .
+          paths: app.tar
+
+  test:
+    working_directory: ~/terraria
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Import docker image
+          command: docker load -i "$PWD/app.tar"
+      - run:
           name: Run tests
           command: |
             docker run -id --volume "$PWD/.circleci/World.wld:/data/Worlds/World.wld" --name terraria ghcr.io/asemlef/terraria
             sleep 10; docker exec terraria nc -z localhost 7777
-      - run:
-          name: Upload docker image
-          command: |
-            echo "$GHCR_PAT" | docker login ghcr.io -u asemlef --password-stdin
-            docker push ghcr.io/asemlef/terraria:latest
+
+  #deploy:
+  #  docker:
+  #    image: cimg/base:2022.01
+  #  steps:
+  #    - run:
+  #        name: Fetch image from cache
+  #    - run:
+  #        name: Upload docker image
+  #        command: |
+  #          echo "$GHCR_PAT" | docker login ghcr.io -u asemlef --password-stdin
+  #          docker push ghcr.io/asemlef/terraria:latest
 
   python-test:
     docker:
@@ -39,6 +63,9 @@ workflows:
           branches:
             only:
               - main
+      - test:
+          requires:
+            - build
 
   cron-test:
     jobs:
