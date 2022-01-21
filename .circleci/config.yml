@@ -40,7 +40,7 @@ jobs:
 
   deploy:
     docker:
-      image: cimg/base:2022.01
+      - image: cimg/base:2022.01
     steps:
       - attach_workspace:
           at: .
