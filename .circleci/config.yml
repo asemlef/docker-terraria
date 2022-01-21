@@ -10,7 +10,8 @@ jobs:
       - image: cimg/base:2022.01
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
           name: Build docker image
           command: docker build -t ghcr.io/asemlef/terraria .
@@ -36,7 +37,10 @@ jobs:
           name: Run tests
           command: |
             docker run -id --volume "$PWD/.circleci/World.wld:/data/Worlds/World.wld" --name terraria ghcr.io/asemlef/terraria
+            docker logs -f terraria > terraria.log &
             sleep 10; docker exec terraria nc -z localhost 7777
+      - store_artifacts:
+          path: ~/terraria/terraria.log
 
   deploy:
     docker:
@@ -62,7 +66,7 @@ jobs:
       - run: python --version
 
 workflows:
-  build:
+  build-and-test:
     jobs:
       - build:
         filters:
