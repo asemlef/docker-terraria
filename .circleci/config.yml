@@ -61,32 +61,10 @@ jobs:
             echo "$GHCR_PAT" | docker login ghcr.io -u asemlef --password-stdin
             docker push ghcr.io/asemlef/terraria:latest
 
-  pr-test:
-    docker:
-      - image: cimg/base:2022.01
-    steps:
-      - run: echo 'Branch:' $CIRCLE_BRANCH
-
-  python-test:
-    docker:
-      - image: cimg/python:3.10.2
-    steps:
-      - checkout
-      - run: python --version
-
 workflows:
   build-and-test:
     jobs:
-      - pr-test:
-          filters:
-            branches:
-              ignore:
-                - main
-      - build:
-          filters:
-            branches:
-              only:
-                - main
+      - build
       - test:
           requires:
             - build
@@ -94,17 +72,10 @@ workflows:
           type: approval
           requires:
             - test
-      - deploy:
-          requires:
-            - hold
-
-  cron-test:
-    jobs:
-      - python-test
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"
           filters:
             branches:
               only:
                 - main
+      - deploy:
+          requires:
+            - hold
