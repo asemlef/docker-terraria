@@ -78,15 +78,15 @@ workflows:
   build-and-test:
     jobs:
       - pr-test:
-        filters:
-          branches:
-            ignore:
-              - main
+          filters:
+            branches:
+              ignore:
+                - main
       - build:
-        filters:
-          branches:
-            only:
-              - main
+          filters:
+            branches:
+              only:
+                - main
       - test:
           requires:
             - build
