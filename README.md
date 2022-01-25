@@ -52,4 +52,4 @@ While the container is designed to use a fresh world that's auto-created on firs
 
 * All settings are meant to be managed using environment variables. Any changes made to serverconfig.txt (including via the server console) will be overwritten on container start.
 * If not using an existing world, the first time the container runs it will autocreate a new world file. This process is quite slow, and the container should not be stopped until it finishes. 
-* The Terraria server binary ignores SIGTERM, so [game-docker-wrapper](https://github.com/iagox86/game-docker-wrapper) is used to catch it and gracefully exit. Special thanks to [iagox86](https://github.com/iagox86) for making the tool and helping with troubleshooting.
+* The Terraria server binary ignores SIGTERM, so [game-docker-wrapper](https://github.com/iagox86/game-docker-wrapper) is used to catch it and gracefully exit. Special thanks to [iagox86](https://github.com/iagox86) for making the tool and helping with troubleshooting!
