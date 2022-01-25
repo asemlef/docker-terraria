@@ -65,7 +65,7 @@ jobs:
     docker:
       - image: cimg/base:2022.01
     steps:
-      - run: echo 'Branch:' $CIRCLE_BRANCH
+      - run: echo 'BRANCH:' $CIRCLE_BRANCH
 
   python-test:
     docker:
