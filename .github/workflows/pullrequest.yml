@@ -1,0 +1,16 @@
+name: "Pull request test"
+
+on: pull_request
+
+jobs:
+  build_and_test:
+    name: "Build and Test"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Build docker image"
+        run: docker build -t ghcr.io/asemlef/terraria .
+      - name: "Run docker image and test"
+        run: |
+          docker run -id --name terraria ghcr.io/asemlef/terraria
+          sleep 120; docker exec terraria nc -z localhost 7777

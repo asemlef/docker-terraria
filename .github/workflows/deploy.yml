@@ -1,0 +1,19 @@
+name: "Deploy test"
+
+on:
+  push:
+    branches:
+      - main2
+
+jobs:
+  build_and_deploy:
+    name: "Build and Deploy"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Build docker image"
+        run: docker build -t ghcr.io/asemlef/terraria .
+      - name: "Deploy docker image"
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u asemlef --password-stdin
+          docker push ghcr.io/asemlef/terraria:latest
