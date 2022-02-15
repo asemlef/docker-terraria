@@ -1,0 +1,15 @@
+version: 2.1
+
+jobs:
+  do-nothing:
+    docker:
+      - image: cimg/base:2022.01
+    steps:
+      - run:
+        - name: "Do nothing"
+          run: echo "Doing nothing"
+
+workflows:
+  do-nothing:
+    jobs:
+      - do-nothing
