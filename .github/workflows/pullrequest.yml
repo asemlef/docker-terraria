@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Build docker image"
-        run: docker build -t ghcr.io/asemlef/terraria .
+        run: docker build -t ghcr.io/asemlef/terraria . --file Dockerfile
       - name: "Run docker image and test"
         run: |
           docker run -id --name terraria ghcr.io/asemlef/terraria
