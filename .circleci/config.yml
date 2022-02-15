@@ -6,8 +6,8 @@ jobs:
       - image: cimg/base:2022.01
     steps:
       - run:
-        - name: "Do nothing"
-          run: echo "Doing nothing"
+          name: "Do nothing"
+          command: echo "Doing nothing"
 
 workflows:
   do-nothing:
