@@ -47,7 +47,7 @@ ENV TERRARIA_SERVER_PASSWORD="" \
     TERRARIA_WORLD_SEED=""
 
 # ports used
-EXPOSE 7778
+EXPOSE 7777
 
 # volume for persistent data
 Volume ["/data"]
