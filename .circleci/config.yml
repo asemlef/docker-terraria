@@ -61,9 +61,23 @@ jobs:
             echo "$GHCR_PAT" | docker login ghcr.io -u asemlef --password-stdin
             docker push ghcr.io/asemlef/terraria:latest
 
+  pr-check:
+    docker:
+      - image: cimg/base:2022.01
+    steps:
+      - run:
+          name: Check if PR
+          command: |
+            if [ "${CIRCLE_PULL_REQUEST##*/}" != "" ]; then
+              echo "Is a pull request"
+            else
+              echo "Is not a pull request"
+            fi
+
 workflows:
   build-and-test:
     jobs:
+      - pr-check
       - build
       - test:
           requires:
