@@ -45,14 +45,11 @@ jobs:
       - store_artifacts:
           path: ~/terraria/terraria.log
 
-  deploy:
+  check-latest-commit:
     docker:
       - image: cimg/base:2022.01
     steps:
       - checkout
-      - setup_remote_docker
-      - attach_workspace:
-          at: .
       - run:
           name: Check that this is the latest commit
           command: |
@@ -63,6 +60,14 @@ jobs:
               echo "more recent commit to branch, exiting"
               exit 1
             fi
+
+  deploy:
+    docker:
+      - image: cimg/base:2022.01
+    steps:
+      - setup_remote_docker
+      - attach_workspace:
+          at: .
       - run:
           name: Import docker image
           command: docker load -i "$PWD/app.tar"
@@ -87,6 +92,9 @@ workflows:
             branches:
               only:
                 - main
-      - deploy:
+      - check-latest-commit:
           requires:
             - hold
+      - deploy:
+          requires:
+            - check-latest-commit
