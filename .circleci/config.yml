@@ -55,8 +55,8 @@ jobs:
           command: |
             LATEST_COMMIT=$(git rev-parse --verify $CIRCLE_BRANCH)
             echo $LATEST_COMMIT
-            echo $CIRCLEC_SHA1
-            if [ "$LATESTCOMMIT" -ne "$CIRCLE_SHA1" ]; then
+            echo $CIRCLE_SHA1
+            if [ "$LATEST_COMMIT" -ne "$CIRCLE_SHA1" ]; then
               echo "more recent commit to branch, exiting"
               exit 1
             fi
