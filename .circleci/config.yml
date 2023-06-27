@@ -53,10 +53,10 @@ jobs:
       - run:
           name: Check that this is the latest commit
           command: |
-            LATEST_COMMIT=$(git rev-parse --verify $CIRCLE_BRANCH)
-            echo $LATEST_COMMIT
-            echo $CIRCLE_SHA1
-            if [ "$LATEST_COMMIT" != "$CIRCLE_SHA1" ]; then
+            LATEST_COMMIT=$(git ls-remote $CIRCLE_REPOSITORY_URL | grep $CIRCLE_BRANCH | cut -f 1)
+            LAST_COMMIT_DATETIME=$(git show --format="%ct" $LATEST_COMMIT | head -n 1)
+            BUILD_COMMIT_DATETIME=$(git show --format="%ct" $CIRCLE_SHA1 | head -n 1)
+            if [ "$LAST_COMMIT_DATETIME" -gt "$BUILD_COMMIT_DATETIME" ]; then
               echo "more recent commit to branch, exiting"
               exit 1
             fi
