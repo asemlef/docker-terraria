@@ -1,7 +1,7 @@
 FROM debian:11-slim
 
 # app versions to use
-ARG TERRARIA_VERSION=1432
+ARG TERRARIA_VERSION=1449
 ARG WRAPPER_VERSION=1.0.2
 
 # run updates
